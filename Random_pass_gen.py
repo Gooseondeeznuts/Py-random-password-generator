@@ -15,6 +15,8 @@ _NUMBER = False
 _CAPS = False
 _ANSWER = False
 
+_PWORD = ""
+
 # Loop while _ANSWER is true to repeat program until user selects the exit option 
 
 while not _ANSWER :
@@ -45,13 +47,12 @@ while not _ANSWER :
         _NUMBER = bool(input("    Would you like to use Numbers y/n\n   :"))
         # Param input for symbol use
         _CAPS = bool(input("    Would you like to use CAPS y/n\n   :"))
+        password_generation(_PW_LENGTH, _SYMBOL, _NUMBER, _CAPS)
     else: break
 
 exit()
 
-def password_generation(plength:str, psymbol:bool, pnumber:bool, p ):
-    
-    password = ""
+def password_generation(plength:str, psymbol:bool, pnumber:bool, pcaps:bool ):
     
     if not _SYMBOL:
         pass
@@ -62,4 +63,5 @@ def password_generation(plength:str, psymbol:bool, pnumber:bool, p ):
     if not _NUMBER:
         pass
     else: pass
+        #x [] = 
 
