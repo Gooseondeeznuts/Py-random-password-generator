@@ -17,6 +17,21 @@ _ANSWER = False
 
 _PWORD = ""
 
+### CALL TO GENERATE PASSWORD ###
+
+def password_generation(plength:str, psymbol:bool, pnumber:bool, pcaps:bool ):
+
+####  get json file keys for data char arrays containing UTF-8 letters, symbols and numbers for password generation.
+
+### init for loop pwd length if statements in said for,generate new random number at the start of the loop to get index from data
+    if _SYMBOL:
+        pass
+    elif _CAPS:
+        pass
+    elif _NUMBER:
+        pass
+        
+
 # Loop while _ANSWER is true to repeat program until user selects the exit option 
 
 while not _ANSWER :
@@ -52,19 +67,5 @@ while not _ANSWER :
 
 exit()
 
-def password_generation(plength:str, psymbol:bool, pnumber:bool, pcaps:bool ):
 
-####  get json file keys for data char arrays containing UTF-8 letters, symbols and numbers for password generation.
-
-### init for loop pwd length if statements in said for,generate new random number at the start of the loop to get index from data
-    if not _SYMBOL:
-        pass
-    else: pass
-    if not _CAPS:
-        pass
-    else: pass
-    if not _NUMBER:
-        pass
-    else: pass
-        #x [] = 
 
