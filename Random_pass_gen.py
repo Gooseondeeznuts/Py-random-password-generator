@@ -34,7 +34,7 @@ def password_generation(): ## params to be used are global variables that captur
     i = 0 ## index for pw_length
 ### init for loop pwd length if statements in said for,generate new random number at the start of the loop to get index from data
     while i < _PW_LENGTH:
-        rnd = random.randrange(4)
+        rnd = random.randrange(params)
 
         match rnd:
             case 1:
