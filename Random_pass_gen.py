@@ -1,5 +1,5 @@
 import random
-import os
+import json
 #### TODO LIST ####
 # -Capture input from user as parameters for password generation
 # -Captured parameters will be global variables (Pwd length, Symbol use, number use, Caps use)
@@ -9,7 +9,7 @@ _PWMIN = 8
 _PWMAX = 28
 
 
-_PW_LENGTH = 5
+_PW_LENGTH = 0
 _SYMBOL = False
 _NUMBER = False
 _CAPS = False
@@ -21,53 +21,35 @@ _PWORD = ""
 
 ### CALL TO GENERATE PASSWORD ###
 
-def password_generation(): ## params to be used are global variables that capture user entries
+def password_generation(pcase:int[int]): ## params to be used are global variables that capture user entries
 
-    params = 1 ## default case is always going to be 1 therfore only lowercase letters will be added to the _PWORD string
+####  get json file keys for data char arrays containing UTF-8 letters and symbols for password generation, numbers will be randomly generated from 0-9 with the random library.
+    i = 0 ## out of bounds mesure
 
-    if _CAPS:
-        params +=1  ## Second case adds CAPS letters to the _PWORD string 
-    elif _SYMBOL:
-        params +=1  ## Third case adds SYMBOLS letters to the _PWORD string
-    else:
-        params +=1  ## Fourth case adds NUMBERS letters to the _PWORD string
-####  get json file keys for data char arrays containing UTF-8 letters, symbols and numbers for password generation.
-    i = 0 ## index for pw_length
-### init for loop pwd length if statements in said for,generate new random number at the start of the loop to get index from data
     while i < _PW_LENGTH:
-        rnd = random.randrange(params) ## for randomness between cases
+        rnd = random.randint(len(pcase)-1) ## for randomness between cases
+     
 
-        match _CAPS:
-            case True:
-                pass
-            case False:
-                pass
-        
-        match _SYMBOL:
-            case True:
-                pass
-            case False:
-                pass
-        
-        match _NUMBER:
-            case True:
-                pass
-            case False:
-                pass
+num_list = [1,3,4]
+rnd = random.randint(5) ## for randomness between cases
+
 
 ### START REGION ###
 
-def get_letters():
-    
-    pass
+## functions to get the date from the json file
 
-def get_symbols():
+def get_letters(): ## gets the letters form the .json file 
+    with open('ressources\data.json', 'r') as file:
+        data = file.read()
+        letters = json.loads(data)
+    return letters['letters']
     
-    pass
 
-def get_nums():
-    
-    pass
+def get_symbols(): ## gets the letters form the .json file
+    with open('.\ressources\data.json', 'r') as file:
+        data = file.read()
+        symbols = json.loads(data)
+    return symbols['symbols']
 
 ### END REGION ###
 
@@ -96,13 +78,21 @@ while not _ANSWER :
             print(f"    Minimal password length is {_PWMIN} and Max password lenght is {_PWMAX}")
             _PW_LENGTH = int(input("    Set password length\n   :"))
         ## end
-        
+        case_list = [1]
         # Param input for symbol use
         _SYMBOL = bool(input("    Would you like to use Symbols y/n\n   :  ")) 
         # Param input for symbol use
         _NUMBER = bool(input("    Would you like to use Numbers y/n\n   :"))
         # Param input for symbol use
         _CAPS = bool(input("    Would you like to use CAPS y/n\n   :"))
+        
+        if _CAPS:
+            case_list.append(2)  ## Second case adds CAPS letters to the _PWORD string 
+        elif _SYMBOL:
+            case_list.append(3)  ## Third case adds SYMBOLS letters to the _PWORD string
+        elif _NUMBER:
+            case_list.append(4)  ## Fourth case adds NUMBERS letters to the _PWORD string
+            
         password_generation()
     else: break
 
