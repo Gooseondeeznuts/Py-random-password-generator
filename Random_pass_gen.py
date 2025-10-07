@@ -28,31 +28,26 @@ def password_generation(pcase): ## pcase holds is sort of like an id for each ca
 
     while i < _PW_LENGTH:
         rnd = random.randint(pcase[0],pcase[len(pcase)-1]) ## for randomness between cases
-     
+        for num in pcase:
+            if num == rnd:
+                match rnd:
+                    case 1:
+                        print('lowercase')
+                        i +=1
+                        break
+                    case 2:
+                        print('caps')
+                        i +=1
+                        break
+                    case 3:
+                        print('symbol')
+                        i +=1
+                        break
+                    case 4:
+                        print('numbers')
+                        i +=1
+                        break
 
-num_list = [1,3,4]
-i = 0 
-while i < len(num_list):
-    rnd = random.randint(num_list[0], num_list[len(num_list)-1]) ## for randomness between cases
-    for num in num_list:
-        if num == rnd:
-            match rnd:
-                case 1:
-                    print('lowercase')
-                    i +=1
-                    break
-                case 2:
-                    print('caps')
-                    i +=1
-                    break
-                case 3:
-                    print('symbol')
-                    i +=1
-                    break
-                case 4:
-                    print('numbers')
-                    i +=1
-                    break
 
 ### START REGION ###
 
