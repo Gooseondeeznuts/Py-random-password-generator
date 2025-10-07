@@ -21,18 +21,38 @@ _PWORD = ""
 
 ### CALL TO GENERATE PASSWORD ###
 
-def password_generation(pcase:int[int]): ## params to be used are global variables that capture user entries
+def password_generation(pcase): ## pcase holds is sort of like an id for each case ex: user says yes to symbols but no to caps and numbers therfoce case list will only include [1(default id), 3,(id for symbols)]
 
 ####  get json file keys for data char arrays containing UTF-8 letters and symbols for password generation, numbers will be randomly generated from 0-9 with the random library.
     i = 0 ## out of bounds mesure
 
     while i < _PW_LENGTH:
-        rnd = random.randint(len(pcase)-1) ## for randomness between cases
+        rnd = random.randint(pcase[0],pcase[len(pcase)-1]) ## for randomness between cases
      
 
 num_list = [1,3,4]
-rnd = random.randint(5) ## for randomness between cases
-
+i = 0 
+while i < len(num_list):
+    rnd = random.randint(num_list[0], num_list[len(num_list)-1]) ## for randomness between cases
+    for num in num_list:
+        if num == rnd:
+            match rnd:
+                case 1:
+                    print('lowercase')
+                    i +=1
+                    break
+                case 2:
+                    print('caps')
+                    i +=1
+                    break
+                case 3:
+                    print('symbol')
+                    i +=1
+                    break
+                case 4:
+                    print('numbers')
+                    i +=1
+                    break
 
 ### START REGION ###
 
@@ -95,7 +115,6 @@ while not _ANSWER :
             
         password_generation()
     else: break
-
 exit()
 
 
