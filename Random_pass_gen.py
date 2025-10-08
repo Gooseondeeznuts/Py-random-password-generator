@@ -20,9 +20,8 @@ def password_generation(pcase): ## pcase holds is sort of like an id for each ca
                                 ##ex: user says yes to symbols but no to caps and numbers 
                                 ## therfore case list will only include [1(default id), 3,(id for symbols)]
 
-####  get json file keys for data char arrays containing UTF-8 letters and symbols for password generation, 
-###   numbers will be randomly generated from 0-9 with the random library.
-    
+        ####  get json file keys for data char arrays containing UTF-8 letters and symbols for password generation, 
+        ###   numbers will be randomly generated from 0-9 with the random library.
     i = 0 ## out of bounds mesure
 
     password = ""
