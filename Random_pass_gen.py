@@ -13,40 +13,46 @@ _PW_LENGTH = 0
 _SYMBOL = False
 _NUMBER = False
 _CAPS = False
-_ANSWER = False
-
-_PWORD = ""
-
-
 
 ### CALL TO GENERATE PASSWORD ###
 
-def password_generation(pcase): ## pcase holds is sort of like an id for each case ex: user says yes to symbols but no to caps and numbers therfoce case list will only include [1(default id), 3,(id for symbols)]
+def password_generation(pcase): ## pcase holds is sort of like an id for each case 
+                                ##ex: user says yes to symbols but no to caps and numbers 
+                                ## therfore case list will only include [1(default id), 3,(id for symbols)]
 
-####  get json file keys for data char arrays containing UTF-8 letters and symbols for password generation, numbers will be randomly generated from 0-9 with the random library.
+####  get json file keys for data char arrays containing UTF-8 letters and symbols for password generation, 
+###   numbers will be randomly generated from 0-9 with the random library.
+    
     i = 0 ## out of bounds mesure
 
-    while i < _PW_LENGTH:
+    password = ""
+
+    while i < _PW_LENGTH+1:
         rnd = random.randint(pcase[0],pcase[len(pcase)-1]) ## for randomness between cases
         for num in pcase:
             if num == rnd:
                 match rnd:
                     case 1:
-                        print('lowercase')
-                        i +=1
+                        letters = get_letters()
+                        password += letters[random.randint(0, len(letters)-1)]
+                        i += 1
                         break
                     case 2:
-                        print('caps')
+                        caps = get_letters()
+                        password += caps[random.randint(0, len(caps)-1)].capitalize()
                         i +=1
                         break
                     case 3:
-                        print('symbol')
+                        symbols = get_symbols()
+                        password += symbols[random.randint(0, len(symbols)-1)]
                         i +=1
                         break
                     case 4:
-                        print('numbers')
+                        x = random.randint(0,9)
+                        password += str(x)
                         i +=1
                         break
+    return password
 
 
 ### START REGION ###
@@ -61,18 +67,16 @@ def get_letters(): ## gets the letters form the .json file
     
 
 def get_symbols(): ## gets the letters form the .json file
-    with open('.\ressources\data.json', 'r') as file:
+    with open('ressources\data.json', 'r') as file:
         data = file.read()
         symbols = json.loads(data)
     return symbols['symbols']
 
 ### END REGION ###
 
-
-
 # Loop while _ANSWER is true to repeat program until user selects the exit option 
 
-while not _ANSWER :
+while  True:
     # Contextual menu for the console
     print("     ###############################")
     print("     ### Welcome to the password ###")
@@ -81,10 +85,11 @@ while not _ANSWER :
     print("     Please select one of the \n     following options: ")
     print("     (1) - Start the password generator\n     (0) - Exit the password generator")
     #captures answer
-    _ANSWER = bool(input("      : "))
+    answer = bool(int(input("      :")))
+
 
     #Checks if _ANSWER is True or False for program continuance
-    if _ANSWER:
+    if answer:
         
         ### Param violation check
         
@@ -93,22 +98,24 @@ while not _ANSWER :
             print(f"    Minimal password length is {_PWMIN} and Max password lenght is {_PWMAX}")
             _PW_LENGTH = int(input("    Set password length\n   :"))
         ## end
-        case_list = [1]
-        # Param input for symbol use
-        _SYMBOL = bool(input("    Would you like to use Symbols y/n\n   :  ")) 
-        # Param input for symbol use
-        _NUMBER = bool(input("    Would you like to use Numbers y/n\n   :"))
-        # Param input for symbol use
-        _CAPS = bool(input("    Would you like to use CAPS y/n\n   :"))
         
+        # Param input for symbol use
+        _SYMBOL = bool(input("    Would you like to use Symbols y/n:")) 
+        # Param input for symbol use
+        _NUMBER = bool(input("    Would you like to use Numbers y/n:"))
+        # Param input for symbol use
+        _CAPS = bool(input("    Would you like to use CAPS y/n:"))
+        
+        case_list = [1]         ## default case 1 is random letters 
+
         if _CAPS:
             case_list.append(2)  ## Second case adds CAPS letters to the _PWORD string 
-        elif _SYMBOL:
+        if _SYMBOL:
             case_list.append(3)  ## Third case adds SYMBOLS letters to the _PWORD string
-        elif _NUMBER:
+        if _NUMBER:
             case_list.append(4)  ## Fourth case adds NUMBERS letters to the _PWORD string
             
-        password_generation()
+        print(f"This is your password:{password_generation(case_list)}")
     else: break
 exit()
 
