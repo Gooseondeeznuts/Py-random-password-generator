@@ -1,4 +1,4 @@
-import random
+import secrets
 import json
 #### TODO LIST ####
 # -Capture input from user as parameters for password generation
@@ -27,27 +27,42 @@ def password_generation(pcase): ## pcase holds is sort of like an id for each ca
     password = ""
 
     while i < _PW_LENGTH+1:
-        rnd = random.randint(pcase[0],pcase[len(pcase)-1]) ## for randomness between cases
+        rnd = secrets.choice(pcase) ## for randomness between cases
         for num in pcase:
             if num == rnd:
                 match rnd:
                     case 1:
-                        letters = get_letters()
-                        password += letters[random.randint(0, len(letters)-1)]
+                        x = 0
+                        ls:list = [0]
+                        letters:list[chr] = get_letters()
+                        for c in letters:
+                            x+=1
+                            ls.append(x)
+                        password += letters[secrets.choice(ls)]
                         i += 1
                         break
                     case 2:
-                        caps = get_letters()
-                        password += caps[random.randint(0, len(caps)-1)].capitalize()
+                        x = 0
+                        ls:list = [0]
+                        caps:list[chr] = get_letters()
+                        for c in letters:
+                            x+=1
+                            ls.append(x)
+                        password += caps[secrets.choice(ls)].capitalize()
                         i +=1
                         break
                     case 3:
-                        symbols = get_symbols()
-                        password += symbols[random.randint(0, len(symbols)-1)]
+                        x = 0
+                        ls:list = [0]
+                        symbols:list[chr] = get_symbols()
+                        for s in symbols:
+                            x+=1
+                            ls.append(x)
+                        password += symbols[secrets.choice(ls)]
                         i +=1
                         break
                     case 4:
-                        x = random.randint(0,9)
+                        x = secrets.choice([0,1,2,3,4,5,6,7,8,9])
                         password += str(x)
                         i +=1
                         break
